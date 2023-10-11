@@ -13,7 +13,7 @@ $check = [
 include './functions.php';
 
 $_SESSION['password'] = createPassword($pswLength, $charRepeat, $check);
-var_dump($_SESSION['password']);
+//var_dump($_SESSION['password']);
 
 ?>
 
@@ -48,12 +48,12 @@ var_dump($_SESSION['password']);
         }
         ?>
 
-        <div class="alert alert-warning py-3 <?php echo ($pswLength > 0 || !isset($pswLength)) ? 'd-none' : ''; ?>">
-            Attenzione: scegliere una lunghezza della password maggiore di zero
+        <div class="alert alert-warning py-3 <?php echo ($pswLength > 0) ? 'd-none' : ''; ?>">
+            Scegliere una lunghezza della password maggiore di zero
         </div>
 
-        <div class="alert alert-warning py-3 <?php echo (isset($check['Letters']) || isset($check['Numbers']) || isset($check['SPecialChars'])) ? 'd-none' : ''; ?>">
-            Attenzione: spuntare almeno una di tra le opzioni <em>Lettere, Numeri e Caratteri speciali</em>
+        <div class="alert alert-warning py-3 <?php echo (isset($check['Letters']) || isset($check['Numbers']) || isset($check['SpecialChars'])) ? 'd-none' : ''; ?>">
+            Spuntare almeno una di tra le opzioni <em>Lettere, Numeri e Caratteri speciali</em>
         </div>
 
         <div class="card text-bg light p-4">

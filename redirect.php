@@ -21,7 +21,7 @@ session_start();
         <div class="card text-bg-light py-4 text-center">
             <div class="card-body">
                 <h5 class="card-title">
-                    Password generata: <?php echo $_SESSION['password']; ?>
+                    Password generata: <br> <?php echo $_SESSION['password']; ?>
                 </h5>
                 <?php
                 if ($_SESSION['alert']) {
