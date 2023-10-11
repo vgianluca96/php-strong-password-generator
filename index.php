@@ -2,8 +2,6 @@
 
 session_start();
 
-$_SESSION['password'] = null;
-
 $pswLength = $_GET['passwordLength'];
 $charRepeat = $_GET['charRepeat'];
 $check = [
@@ -15,7 +13,7 @@ $check = [
 include './functions.php';
 
 $_SESSION['password'] = createPassword($pswLength, $charRepeat, $check);
-//var_dump($_SESSION['password']);
+var_dump($_SESSION['password']);
 
 ?>
 
@@ -35,39 +33,29 @@ $_SESSION['password'] = createPassword($pswLength, $charRepeat, $check);
     <div class="container">
 
         <div class="text-center py-3">
-
             <h1>
                 Strong password generator
             </h1>
             <h2>
                 Genera una password sicura
             </h2>
-
         </div>
 
         <?php
 
-        if ($pswLength > 0 && (isset($check['Letters']) || isset($check['Numbers']) || isset($check['SpecialChars']))) {
+        if (isset($_SESSION['password']) && isset($pswLength)) {
             header('Location: ./redirect.php');
-        } else {
-            if ($pswLength < 1) {
-        ?>
-
-                <div class="alert alert-warning py-3">
-                    Attenzione: scegliere una lunghezza della password maggiore di zero
-                </div>
-
-            <?php
-            }
-            if (!isset($check['Letters']) && !isset($check['Numbers']) && !isset($check['SPecialChars'])) {
-            ?>
-                <div class="alert alert-warning py-3">
-                    Attenzione: spuntare almeno una di tre tra <em>Lettere, Numeri e Caratteri speciali</em>
-                </div>
-        <?php
-            }
         }
         ?>
+
+        <div class="alert alert-warning py-3 <?php echo ($pswLength > 0 || !isset($pswLength)) ? 'd-none' : ''; ?>">
+            Attenzione: scegliere una lunghezza della password maggiore di zero
+        </div>
+
+        <div class="alert alert-warning py-3 <?php echo (isset($check['Letters']) || isset($check['Numbers']) || isset($check['SPecialChars'])) ? 'd-none' : ''; ?>">
+            Attenzione: spuntare almeno una di tra le opzioni <em>Lettere, Numeri e Caratteri speciali</em>
+        </div>
+
         <div class="card text-bg light p-4">
 
             <form action="" method="get">
@@ -127,6 +115,7 @@ $_SESSION['password'] = createPassword($pswLength, $charRepeat, $check);
                 <button type="submit" class="btn btn-dark">
                     Invia
                 </button>
+                <input type="reset" class="btn btn-dark">
             </form>
 
         </div>

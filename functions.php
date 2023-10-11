@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 function createPassword($strLength, $repeat, $check)
 {
     $letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -26,11 +28,19 @@ function createPassword($strLength, $repeat, $check)
 
         $string = '';
 
-        for ($i = 0; $i < $strLength; $i++) {
+        if ($repeat == 0 && strlen($characters) < $strLength) {
+            $maxIteractions = strlen($characters);
+            $_SESSION['alert'] = true;
+        } else {
+            $maxIteractions = $strLength;
+            $_SESSION['alert'] = false;
+        }
+
+        for ($i = 0; $i < $maxIteractions; $i++) {
 
             $rndNum = random_int(0, strlen($characters) - 1);
 
-            if ($repeat != '0') {
+            if ($repeat == 1) {
                 $string .= $characters[$rndNum];
             } else {
                 if (!str_contains($string, $characters[$rndNum])) {

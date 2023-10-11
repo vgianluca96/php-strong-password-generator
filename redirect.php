@@ -23,6 +23,16 @@ session_start();
                 <h5 class="card-title">
                     Password generata: <?php echo $_SESSION['password']; ?>
                 </h5>
+                <?php
+                if ($_SESSION['alert']) {
+                ?>
+                    <p class="cad-text">
+                        <em>
+                            Si è scelto di non avere caratteri ripetuti: la password generata ha lunghezza pari al numero di caratteri disponibili
+                        </em>
+                    </p>
+                <?php
+                } ?>
             </div>
         </div>
     </div>
