@@ -1,10 +1,29 @@
 <?php
 
-function createPassword($strLength, $repeat)
+function createPassword($strLength, $repeat, $check)
 {
+    $letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $numbers = '0123456789';
+    $specialChars = '@{}[]_-';
+    $characters = '';
 
-    if ($strLength > 0) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@{}[]_-';
+    if ($check['Letters'] == '1') {
+        $characters .= $letters;
+        //var_dump($characters);
+    }
+
+    if ($check['Numbers'] == '1') {
+        $characters .= $numbers;
+        //var_dump($characters);
+    }
+
+    if ($check['SpecialChars'] == '1') {
+        $characters .= $specialChars;
+        //var_dump($characters);
+    }
+
+    if ($strLength > 0 && $characters != '') {
+
         $string = '';
 
         for ($i = 0; $i < $strLength; $i++) {
@@ -20,7 +39,6 @@ function createPassword($strLength, $repeat)
                     $i--;
                 }
             }
-            var_dump($string);
         }
         return $string;
     }

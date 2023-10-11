@@ -2,20 +2,19 @@
 
 session_start();
 
+$_SESSION['password'] = null;
+
 $pswLength = $_GET['passwordLength'];
 $charRepeat = $_GET['charRepeat'];
-//var_dump($pswLength);
-//var_dump($charRepeat);
 $check = [
     'Letters' => $_GET['checkLet'],
-    'Number' => $_GET['checkNum'],
+    'Numbers' => $_GET['checkNum'],
     'SpecialChars' => $_GET['checkSpec'],
 ];
-var_dump($check);
 
 include './functions.php';
 
-$_SESSION['password'] = createPassword($pswLength, $charRepeat);
+$_SESSION['password'] = createPassword($pswLength, $charRepeat, $check);
 //var_dump($_SESSION['password']);
 
 ?>
@@ -48,17 +47,25 @@ $_SESSION['password'] = createPassword($pswLength, $charRepeat);
 
         <?php
 
-        if (isset($_SESSION['password'])) {
+        if ($pswLength > 0 && (isset($check['Letters']) || isset($check['Numbers']) || isset($check['SpecialChars']))) {
             header('Location: ./redirect.php');
-            //var_dump($_SESSION['password']);
-        } elseif (isset($pswLength)) {
+        } else {
+            if ($pswLength < 1) {
         ?>
 
-            <div class="alert alert-warning py-3">
-                Attenzione: scegliere una lunghezza della password maggiore di zero
-            </div>
+                <div class="alert alert-warning py-3">
+                    Attenzione: scegliere una lunghezza della password maggiore di zero
+                </div>
 
+            <?php
+            }
+            if (!isset($check['Letters']) && !isset($check['Numbers']) && !isset($check['SPecialChars'])) {
+            ?>
+                <div class="alert alert-warning py-3">
+                    Spuntare almeno una di tre tra <em>Lettere, Numeri e Caratteri speciali</em>
+                </div>
         <?php
+            }
         }
         ?>
         <div class="card text-bg light p-4">
