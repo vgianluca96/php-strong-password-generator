@@ -3,16 +3,14 @@
 session_start();
 
 $pswLength = $_GET['passwordLength'];
+$charRepeat = $_GET['charRepeat'];
 //var_dump($pswLength);
+//var_dump($charRepeat);
 
 include './functions.php';
 
-$_SESSION['password'] = createPassword($pswLength);
-
-if (isset($_SESSION['password'])) {
-    header('Location: ./redirect.php');
-    var_dump($_SESSION['password']);
-}
+$_SESSION['password'] = createPassword($pswLength, $charRepeat);
+//var_dump($_SESSION['password']);
 
 ?>
 
@@ -42,20 +40,43 @@ if (isset($_SESSION['password'])) {
 
         </div>
 
-        <div class="alert alert-primary py-3">
+        <?php
 
-            Password generata: <?php echo $_SESSION['password']; ?>
+        if (isset($_SESSION['password'])) {
+            header('Location: ./redirect.php');
+            //var_dump($_SESSION['password']);
+        } elseif (isset($pswLength)) {
+        ?>
 
-        </div>
+            <div class="alert alert-warning py-3">
+                Attenzione: scegliere una lunghezza della password maggiore di zero
+            </div>
 
+        <?php
+        }
+        ?>
         <div class="card text-bg light p-4">
 
             <form action="" method="get">
-                <div class="d-flex justify-content-between align-items-center py-3">
+                <div class="py-3">
                     <label for="passwordLength" class="form-label">
                         Lunghezza password:
                     </label>
-                    <input type="number" id="passwordLength" name="passwordLength" class="form-control w-50">
+                    <input type="number" id="passwordLength" name="passwordLength" class="form-control">
+                </div>
+                <div class="py-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="charRepeat" id="flexRadioDefault1" value="1" checked>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Consenti ripetizione di più caratteri
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="charRepeat" id="flexRadioDefault2" value="0">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Non consentire ripetizione di più caratteri
+                        </label>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-dark">
