@@ -6,6 +6,12 @@ $pswLength = $_GET['passwordLength'];
 $charRepeat = $_GET['charRepeat'];
 //var_dump($pswLength);
 //var_dump($charRepeat);
+$check = [
+    'Letters' => $_GET['checkLet'],
+    'Number' => $_GET['checkNum'],
+    'SpecialChars' => $_GET['checkSpec'],
+];
+var_dump($check);
 
 include './functions.php';
 
@@ -75,6 +81,26 @@ $_SESSION['password'] = createPassword($pswLength, $charRepeat);
                         <input class="form-check-input" type="radio" name="charRepeat" id="flexRadioDefault2" value="0">
                         <label class="form-check-label" for="flexRadioDefault2">
                             Non consentire ripetizione di più caratteri
+                        </label>
+                    </div>
+                </div>
+                <div class="py-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" id="check1" name="checkLet">
+                        <label class="form-check-label" for="check1">
+                            Lettere
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" id="check2" name="checkNum">
+                        <label class="form-check-label" for="check2">
+                            Numeri
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" id="check3" name="checkSpec">
+                        <label class="form-check-label" for="check3">
+                            Caratteri speciali
                         </label>
                     </div>
                 </div>
