@@ -62,7 +62,7 @@ $_SESSION['password'] = createPassword($pswLength, $charRepeat, $check);
             if (!isset($check['Letters']) && !isset($check['Numbers']) && !isset($check['SPecialChars'])) {
             ?>
                 <div class="alert alert-warning py-3">
-                    Spuntare almeno una di tre tra <em>Lettere, Numeri e Caratteri speciali</em>
+                    Attenzione: spuntare almeno una di tre tra <em>Lettere, Numeri e Caratteri speciali</em>
                 </div>
         <?php
             }
@@ -71,44 +71,56 @@ $_SESSION['password'] = createPassword($pswLength, $charRepeat, $check);
         <div class="card text-bg light p-4">
 
             <form action="" method="get">
-                <div class="py-3">
-                    <label for="passwordLength" class="form-label">
-                        Lunghezza password:
-                    </label>
-                    <input type="number" id="passwordLength" name="passwordLength" class="form-control">
-                </div>
-                <div class="py-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="charRepeat" id="flexRadioDefault1" value="1" checked>
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            Consenti ripetizione di più caratteri
-                        </label>
+                <div class="row py-3">
+                    <div class="col-6">
+                        <h5>Lunghezza password</h5>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="charRepeat" id="flexRadioDefault2" value="0">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            Non consentire ripetizione di più caratteri
-                        </label>
+                    <div class="col">
+                        <input type="number" id="passwordLength" name="passwordLength" class="form-control">
                     </div>
                 </div>
-                <div class="py-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="check1" name="checkLet">
-                        <label class="form-check-label" for="check1">
-                            Lettere
-                        </label>
+                <div class="row py-3">
+                    <div class="col-6">
+                        <h5>Consenti ripetizione di uno più caratteri</h5>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="check2" name="checkNum">
-                        <label class="form-check-label" for="check2">
-                            Numeri
-                        </label>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="charRepeat" id="flexRadioDefault1" value="1" checked>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Consenti ripetizione di più caratteri
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="charRepeat" id="flexRadioDefault2" value="0">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Non consentire ripetizione di più caratteri
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="check3" name="checkSpec">
-                        <label class="form-check-label" for="check3">
-                            Caratteri speciali
-                        </label>
+                </div>
+                <div class="row py-3">
+                    <div class="col-6">
+                        <h5>Stabilisci da quali caratteri sarà composta la password</h5>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" id="check1" name="checkLet">
+                            <label class="form-check-label" for="check1">
+                                Lettere
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" id="check2" name="checkNum">
+                            <label class="form-check-label" for="check2">
+                                Numeri
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" id="check3" name="checkSpec">
+                            <label class="form-check-label" for="check3">
+                                Caratteri speciali
+                            </label>
+                        </div>
                     </div>
                 </div>
 
