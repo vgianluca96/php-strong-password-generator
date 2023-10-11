@@ -1,6 +1,18 @@
 <?php
 
+session_start();
+
+$pswLength = $_GET['passwordLength'];
+//var_dump($pswLength);
+
 include './functions.php';
+
+$_SESSION['password'] = createPassword($pswLength);
+
+if (isset($_SESSION['password'])) {
+    header('Location: ./redirect.php');
+    var_dump($_SESSION['password']);
+}
 
 ?>
 
@@ -32,7 +44,7 @@ include './functions.php';
 
         <div class="alert alert-primary py-3">
 
-            Password generata: <?php echo createPassword($pswLength) ?>
+            Password generata: <?php echo $_SESSION['password']; ?>
 
         </div>
 
